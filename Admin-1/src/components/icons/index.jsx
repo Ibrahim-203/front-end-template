@@ -15,3 +15,4 @@ export { default as ChevronRightIcon } from "./ChevronRightIcon";
 export { default as TrendUpIcon } from "./TrendUpIcon";
 export { default as TrendDownIcon } from "./TrendDownIcon";
 export { default as X } from "./XIcon"; 
+export {default as AlertTriangle} from "./AlertTriangleIcon";

@@ -10,11 +10,15 @@ import EditIcon from "../components/icons/EditIcon.jsx";
 import TrashIcon from "../components/icons/TrashIcon.jsx";
 import PlusIcon from "../components/icons/PlusIcon.jsx";
 import Modal from "../components/ui/Modal.jsx";
+import ConfirmModal from "../components/ui/ConfirmModal.jsx";
 
 export default function UsersPage() {
   const [search, setSearch] = useState("");
   const [filter, setFilter] = useState("All");
   const [isAddModalOpen, setIsAddModalOpen] = useState(false);
+
+  const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
+  const [userToDelete, setUserToDelete] = useState(null);
 
   const filtered = USERS.filter(u =>
     (filter === "All" || u.status === filter) &&
@@ -57,8 +61,8 @@ export default function UsersPage() {
                 key={f}
                 onClick={() => setFilter(f)}
                 className={`px-4 py-2 text-sm font-medium rounded-xl transition-all ${filter === f
-                    ? "bg-[#eff6ff] text-[#1a56db] border border-[#1a56db]"
-                    : "bg-white border border-[#e2e8f0] text-[#64748b] hover:bg-gray-50"
+                  ? "bg-[#eff6ff] text-[#1a56db] border border-[#1a56db]"
+                  : "bg-white border border-[#e2e8f0] text-[#64748b] hover:bg-gray-50"
                   }`}
               >
                 {f}
@@ -104,7 +108,12 @@ export default function UsersPage() {
                     <div className="flex gap-2">
                       <button className="p-2 hover:bg-gray-100 rounded-lg text-[#64748b] hover:text-[#0f172a]"><EyeIcon size={14} /></button>
                       <button className="p-2 hover:bg-gray-100 rounded-lg text-[#64748b] hover:text-[#0f172a]"><EditIcon size={14} /></button>
-                      <button className="p-2 hover:bg-gray-100 rounded-lg text-red-500 hover:text-red-600"><TrashIcon size={14} /></button>
+                      <button
+                        onClick={() => {
+                          setUserToDelete(u);
+                          setIsDeleteModalOpen(true);
+                        }}
+                        className="p-2 hover:bg-gray-100 rounded-lg text-red-500 hover:text-red-600"><TrashIcon size={14} /></button>
                     </div>
                   </td>
                 </tr>
@@ -191,6 +200,25 @@ export default function UsersPage() {
           </div>
         </div>
       </Modal>
+
+      <ConfirmModal
+        isOpen={isDeleteModalOpen}
+        onClose={() => {
+          setIsDeleteModalOpen(false);
+          setUserToDelete(null);
+        }}
+        onConfirm={() => {
+          console.log("Suppression de l'utilisateur :", userToDelete?.name);
+          // Ici tu feras plus tard l'appel API
+          alert(`Utilisateur ${userToDelete?.name} supprimé !`);
+          setIsDeleteModalOpen(false);
+          setUserToDelete(null);
+        }}
+        title="Supprimer l'utilisateur"
+        message={`Êtes-vous sûr de vouloir supprimer ${userToDelete?.name} ? Cette action est irréversible.`}
+        confirmText="Oui, supprimer"
+        type="danger"
+      />
 
     </div>
   );
