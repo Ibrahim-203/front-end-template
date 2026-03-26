@@ -1,5 +1,4 @@
-import { useState } from "react";
-import { COLORS } from "../constants/colors";
+import { useEffect, useState } from "react";
 import { icons } from "../constants/icons.jsx";
 import Avatar from "../components/ui/Avatar";
 import StatusBadge from "../components/ui/StatusBadge";
@@ -11,11 +10,13 @@ import TrashIcon from "../components/icons/TrashIcon.jsx";
 import PlusIcon from "../components/icons/PlusIcon.jsx";
 import Modal from "../components/ui/Modal.jsx";
 import ConfirmModal from "../components/ui/ConfirmModal.jsx";
+import { useToast } from "../contexts/ToastContext.jsx";
 
 export default function UsersPage() {
   const [search, setSearch] = useState("");
   const [filter, setFilter] = useState("All");
   const [isAddModalOpen, setIsAddModalOpen] = useState(false);
+  const {success} = useToast()
 
   const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
   const [userToDelete, setUserToDelete] = useState(null);
@@ -190,7 +191,7 @@ export default function UsersPage() {
             </button>
             <button
               onClick={() => {
-                alert("Utilisateur ajouté avec succès ! (simulation)");
+                success("Utilisateur ajouté avec succès ! (simulation)");
                 setIsAddModalOpen(false);
               }}
               className="flex-1 py-3 bg-[#1a56db] hover:bg-[#1e40af] text-white rounded-2xl font-medium transition-colors"

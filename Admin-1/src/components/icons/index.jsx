@@ -16,3 +16,6 @@ export { default as TrendUpIcon } from "./TrendUpIcon";
 export { default as TrendDownIcon } from "./TrendDownIcon";
 export { default as X } from "./XIcon"; 
 export {default as AlertTriangle} from "./AlertTriangleIcon";
+export { default as CheckCircle } from "./CheckCircleIcon";
+export { default as AlertCircle } from "./AlertCircleIcon";
+export { default as Info } from "./InfoIcon";

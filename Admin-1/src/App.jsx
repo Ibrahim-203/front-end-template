@@ -1,5 +1,6 @@
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import { AuthProvider} from "./contexts/AuthContext";
+import { ToastProvider } from "./contexts/ToastContext";
 
 import AdminLayout from "./components/layout/AdminLayout";
 import LoginPage from "./pages/LoginPage";
@@ -9,10 +10,12 @@ import UsersPage from "./pages/UsersPage";
 import SettingsPage from "./pages/SettingsPage";
 import PrivateRoute from "./components/routing/PrivateRoute";
 import PublicRoute from "./components/routing/PublicRoute";
+import ToastContainer from "./components/ui/ToastContainer";
 
 export default function App() {
   return (
     <AuthProvider>
+      <ToastProvider>
       <BrowserRouter>
         <Routes>
           {/* Route publique : Login */}
@@ -32,7 +35,9 @@ export default function App() {
           {/* Route de fallback */}
           <Route path="*" element={<Navigate to="/login" replace />} />
         </Routes>
+        <ToastContainer/>
       </BrowserRouter>
+      </ToastProvider>
     </AuthProvider>
   );
 }
