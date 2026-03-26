@@ -1,0 +1,15 @@
+export { default as DashboardIcon } from "./DashboardIcon";
+export { default as UsersIcon } from "./UsersIcon";
+export { default as SettingsIcon } from "./SettingsIcon";
+export { default as BellIcon } from "./BellIcon";
+export { default as LogoutIcon } from "./LogoutIcon";
+export { default as EyeIcon } from "./EyeIcon";
+export { default as EditIcon } from "./EditIcon";
+export { default as TrashIcon } from "./TrashIcon";
+export { default as SearchIcon } from "./SearchIcon";
+export { default as PlusIcon } from "./PlusIcon";
+export { default as CameraIcon } from "./CameraIcon";
+export { default as ChevronLeftIcon } from "./ChevronLeftIcon";
+export { default as ChevronRightIcon } from "./ChevronRightIcon";
+export { default as TrendUpIcon } from "./TrendUpIcon";
+export { default as TrendDownIcon } from "./TrendDownIcon";

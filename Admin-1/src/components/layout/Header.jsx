@@ -4,6 +4,7 @@ import { icons } from "../../constants/icons";
 import { useAuth } from "../../contexts/AuthContext";
 import Avatar from "../ui/Avatar";   // On va le créer juste après
 import Dropdown from "../ui/Dropdown";
+import Breadcrumbs from "../ui/Breadcrumbs";
 
 export default function Header({ sidebarOpen, setSidebarOpen }) {
   const { user, logout } = useAuth();
@@ -17,15 +18,23 @@ export default function Header({ sidebarOpen, setSidebarOpen }) {
     logout();
   };
   return (
-    <header 
+    <header
       className="h-16 bg-white border-b border-[#e2e8f0] flex items-center justify-between px-6 sticky top-0 z-50"
     >
-      <button
-        onClick={() => setSidebarOpen(!sidebarOpen)}
-        className="w-9 h-9 rounded-xl border border-[#e2e8f0] flex items-center justify-center text-[#64748b] hover:text-[#0f172a] transition-colors"
-      >
-        {sidebarOpen ? icons.chevronLeft : icons.chevronRight}
-      </button>
+      <div className="flex-1 flex items-center gap-6">
+        {/* Toggle Sidebar */}
+        <button
+          onClick={() => setSidebarOpen(!sidebarOpen)}
+          className="w-9 h-9 rounded-xl border border-[#e2e8f0] flex items-center justify-center text-[#64748b] hover:text-[#0f172a] hover:bg-gray-50 transition-all flex-shrink-0"
+        >
+          {sidebarOpen ? icons.chevronLeft : icons.chevronRight}
+        </button>
+
+        {/* Breadcrumbs */}
+        <div className="flex-1">
+          <Breadcrumbs />
+        </div>
+      </div>
 
       <div className="flex items-center gap-6">
         {/* Notifications Dropdown */}
