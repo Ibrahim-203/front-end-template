@@ -8,10 +8,13 @@ import { USERS } from "../constants/usersMockData.js";
 import EyeIcon from "../components/icons/EyeIcon.jsx";
 import EditIcon from "../components/icons/EditIcon.jsx";
 import TrashIcon from "../components/icons/TrashIcon.jsx";
+import PlusIcon from "../components/icons/PlusIcon.jsx";
+import Modal from "../components/ui/Modal.jsx";
 
 export default function UsersPage() {
   const [search, setSearch] = useState("");
   const [filter, setFilter] = useState("All");
+  const [isAddModalOpen, setIsAddModalOpen] = useState(false);
 
   const filtered = USERS.filter(u =>
     (filter === "All" || u.status === filter) &&
@@ -25,8 +28,10 @@ export default function UsersPage() {
           <h1 className="text-2xl font-bold text-[#0f172a]">Utilisateurs</h1>
           <p className="text-[#64748b] mt-1">{USERS.length} utilisateurs au total</p>
         </div>
-        <button className="flex items-center gap-2 bg-[#1a56db] text-white px-5 py-2.5 rounded-xl font-medium hover:bg-[#1e40af] transition-colors">
-          {icons.plus} Ajouter un utilisateur
+        <button
+          onClick={() => setIsAddModalOpen(true)}
+          className="flex items-center gap-2 bg-[#1a56db] text-white px-5 py-2.5 rounded-xl font-medium hover:bg-[#1e40af] transition-colors">
+          <PlusIcon /> Ajouter un utilisateur
         </button>
       </div>
 
@@ -51,11 +56,10 @@ export default function UsersPage() {
               <button
                 key={f}
                 onClick={() => setFilter(f)}
-                className={`px-4 py-2 text-sm font-medium rounded-xl transition-all ${
-                  filter === f 
-                    ? "bg-[#eff6ff] text-[#1a56db] border border-[#1a56db]" 
+                className={`px-4 py-2 text-sm font-medium rounded-xl transition-all ${filter === f
+                    ? "bg-[#eff6ff] text-[#1a56db] border border-[#1a56db]"
                     : "bg-white border border-[#e2e8f0] text-[#64748b] hover:bg-gray-50"
-                }`}
+                  }`}
               >
                 {f}
               </button>
@@ -98,9 +102,9 @@ export default function UsersPage() {
                   <td className="px-6 py-4 text-sm text-[#64748b]">{u.joined}</td>
                   <td className="px-6 py-4">
                     <div className="flex gap-2">
-                      <button className="p-2 hover:bg-gray-100 rounded-lg text-[#64748b] hover:text-[#0f172a]"><EyeIcon size={14}/></button>
-                      <button className="p-2 hover:bg-gray-100 rounded-lg text-[#64748b] hover:text-[#0f172a]"><EditIcon size={14}/></button>
-                      <button className="p-2 hover:bg-gray-100 rounded-lg text-red-500 hover:text-red-600"><TrashIcon size={14}/></button>
+                      <button className="p-2 hover:bg-gray-100 rounded-lg text-[#64748b] hover:text-[#0f172a]"><EyeIcon size={14} /></button>
+                      <button className="p-2 hover:bg-gray-100 rounded-lg text-[#64748b] hover:text-[#0f172a]"><EditIcon size={14} /></button>
+                      <button className="p-2 hover:bg-gray-100 rounded-lg text-red-500 hover:text-red-600"><TrashIcon size={14} /></button>
                     </div>
                   </td>
                 </tr>
@@ -124,6 +128,70 @@ export default function UsersPage() {
           </div>
         </div>
       </div>
+
+      <Modal
+        isOpen={isAddModalOpen}
+        onClose={() => setIsAddModalOpen(false)}
+        title="Ajouter un nouvel utilisateur"
+        size="md"
+      >
+        <div className="space-y-6 py-2">
+          <div>
+            <label className="block text-sm font-medium text-[#64748b] mb-2">Nom complet</label>
+            <input
+              type="text"
+              className="w-full px-4 py-3 border border-[#e2e8f0] rounded-2xl focus:outline-none focus:border-[#1a56db] focus:ring-1 focus:ring-[#1a56db]"
+              placeholder="Ex: Sophie Bernard"
+            />
+          </div>
+
+          <div>
+            <label className="block text-sm font-medium text-[#64748b] mb-2">Adresse email</label>
+            <input
+              type="email"
+              className="w-full px-4 py-3 border border-[#e2e8f0] rounded-2xl focus:outline-none focus:border-[#1a56db]"
+              placeholder="sophie.bernard@example.com"
+            />
+          </div>
+
+          <div className="grid grid-cols-2 gap-4">
+            <div>
+              <label className="block text-sm font-medium text-[#64748b] mb-2">Rôle</label>
+              <select className="w-full px-4 py-3 border border-[#e2e8f0] rounded-2xl focus:outline-none focus:border-[#1a56db]">
+                <option>Viewer</option>
+                <option>Editor</option>
+                <option>Admin</option>
+              </select>
+            </div>
+            <div>
+              <label className="block text-sm font-medium text-[#64748b] mb-2">Statut</label>
+              <select className="w-full px-4 py-3 border border-[#e2e8f0] rounded-2xl focus:outline-none focus:border-[#1a56db]">
+                <option>Active</option>
+                <option>Pending</option>
+              </select>
+            </div>
+          </div>
+
+          <div className="flex gap-3 pt-6">
+            <button
+              onClick={() => setIsAddModalOpen(false)}
+              className="flex-1 py-3 border border-[#e2e8f0] rounded-2xl font-medium text-gray-600 hover:bg-gray-50 transition-colors"
+            >
+              Annuler
+            </button>
+            <button
+              onClick={() => {
+                alert("Utilisateur ajouté avec succès ! (simulation)");
+                setIsAddModalOpen(false);
+              }}
+              className="flex-1 py-3 bg-[#1a56db] hover:bg-[#1e40af] text-white rounded-2xl font-medium transition-colors"
+            >
+              Créer l'utilisateur
+            </button>
+          </div>
+        </div>
+      </Modal>
+
     </div>
   );
 }
