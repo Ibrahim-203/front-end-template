@@ -1,9 +1,10 @@
 import { NavLink } from "react-router-dom";
 import { COLORS } from "../../constants/colors";
-import { icons } from "../../constants/icons";
 import { NAV_ITEMS } from "../../constants/navItems";
 import Avatar from "../ui/Avatar";
 import { useAuth } from "../../contexts/AuthContext";
+
+import {LogoIcon, LogoutIcon} from '../icons/'
 
 
 
@@ -23,11 +24,7 @@ export default function Sidebar({ sidebarOpen }) {
                 className="flex items-center gap-3 px-4 py-4.5 border-b border-white/10 min-h-16"
             >
                 <div className="w-8 h-8 rounded-lg bg-[#1a56db] flex items-center justify-center shrink-0">
-                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#fff" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
-                        <path d="M12 2L2 7l10 5 10-5-10-5z" />
-                        <path d="M2 17l10 5 10-5" />
-                        <path d="M2 12l10 5 10-5" />
-                    </svg>
+                    <LogoIcon/>
                 </div>
                 {sidebarOpen && (
                     <span className="text-white font-bold text-[15px] whitespace-nowrap">AdminPanel</span>
@@ -70,7 +67,7 @@ export default function Sidebar({ sidebarOpen }) {
                     onClick={logout}
                     className={`flex items-center gap-3 w-full px-3 py-2.25 text-[#64748b] hover:text-white rounded-xl mt-1 transition-all ${sidebarOpen ? "" : "justify-center"}`}
                 >
-                    {icons.logout}
+                    <LogoutIcon/>
                     {sidebarOpen && <span className="text-sm" >Déconnexion</span>}
                 </button>
             </div>

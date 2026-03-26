@@ -14,7 +14,7 @@ export default function Avatar({ initials, index = 0, size = 32 }) {
         fontSize: Math.floor(size * 0.36),
         fontWeight: 600,
       }}
-      className="rounded-full flex items-center justify-center text-white flex-shrink-0"
+      className="rounded-full flex items-center justify-center text-white shrink-0"
     >
       {initials}
     </div>

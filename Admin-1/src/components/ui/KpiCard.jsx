@@ -1,5 +1,5 @@
-import { icons } from "../../constants/icons.jsx";
-import { COLORS } from "../../constants/colors";
+import TrendUpIcon from "../icons/TrendUpIcon.jsx";
+import TrendDownIcon from "../icons/TrendDownIcon.jsx";
 
 export default function KpiCard({ label, value, sub, up }) {
   return (
@@ -9,7 +9,7 @@ export default function KpiCard({ label, value, sub, up }) {
       
       <div className="flex items-center gap-2">
         <span className={up ? "text-[#059669]" : "text-[#dc2626]"}>
-          {up ? icons.trendUp : icons.trendDown}
+          {up ? <TrendUpIcon/> : <TrendDownIcon/>}
         </span>
         <span className={`text-sm font-medium ${up ? "text-[#059669]" : "text-[#dc2626]"}`}>
           {sub}

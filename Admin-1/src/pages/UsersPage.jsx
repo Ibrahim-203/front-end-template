@@ -5,6 +5,9 @@ import Avatar from "../components/ui/Avatar";
 import StatusBadge from "../components/ui/StatusBadge";
 
 import { USERS } from "../constants/usersMockData.js";
+import EyeIcon from "../components/icons/EyeIcon.jsx";
+import EditIcon from "../components/icons/EditIcon.jsx";
+import TrashIcon from "../components/icons/TrashIcon.jsx";
 
 export default function UsersPage() {
   const [search, setSearch] = useState("");
@@ -95,9 +98,9 @@ export default function UsersPage() {
                   <td className="px-6 py-4 text-sm text-[#64748b]">{u.joined}</td>
                   <td className="px-6 py-4">
                     <div className="flex gap-2">
-                      <button className="p-2 hover:bg-gray-100 rounded-lg text-[#64748b] hover:text-[#0f172a]">{icons.eye}</button>
-                      <button className="p-2 hover:bg-gray-100 rounded-lg text-[#64748b] hover:text-[#0f172a]">{icons.edit}</button>
-                      <button className="p-2 hover:bg-gray-100 rounded-lg text-red-500 hover:text-red-600">{icons.trash}</button>
+                      <button className="p-2 hover:bg-gray-100 rounded-lg text-[#64748b] hover:text-[#0f172a]"><EyeIcon size={14}/></button>
+                      <button className="p-2 hover:bg-gray-100 rounded-lg text-[#64748b] hover:text-[#0f172a]"><EditIcon size={14}/></button>
+                      <button className="p-2 hover:bg-gray-100 rounded-lg text-red-500 hover:text-red-600"><TrashIcon size={14}/></button>
                     </div>
                   </td>
                 </tr>

@@ -1,10 +1,10 @@
 import { useNavigate } from "react-router-dom";
 import { COLORS } from "../../constants/colors";
-import { icons } from "../../constants/icons";
 import { useAuth } from "../../contexts/AuthContext";
 import Avatar from "../ui/Avatar";   // On va le créer juste après
 import Dropdown from "../ui/Dropdown";
 import Breadcrumbs from "../ui/Breadcrumbs";
+import { BellIcon, ChevronLeftIcon, ChevronRightIcon, LogoutIcon } from "../icons";
 
 export default function Header({ sidebarOpen, setSidebarOpen }) {
   const { user, logout } = useAuth();
@@ -25,9 +25,9 @@ export default function Header({ sidebarOpen, setSidebarOpen }) {
         {/* Toggle Sidebar */}
         <button
           onClick={() => setSidebarOpen(!sidebarOpen)}
-          className="w-9 h-9 rounded-xl border border-[#e2e8f0] flex items-center justify-center text-[#64748b] hover:text-[#0f172a] hover:bg-gray-50 transition-all flex-shrink-0"
+          className="w-9 h-9 rounded-xl border border-[#e2e8f0] flex items-center justify-center text-[#64748b] hover:text-[#0f172a] hover:bg-gray-50 transition-all shrink-0"
         >
-          {sidebarOpen ? icons.chevronLeft : icons.chevronRight}
+          {sidebarOpen ? <ChevronLeftIcon/> : <ChevronRightIcon/>}
         </button>
 
         {/* Breadcrumbs */}
@@ -41,7 +41,7 @@ export default function Header({ sidebarOpen, setSidebarOpen }) {
         <Dropdown
           trigger={
             <div className="relative w-9 h-9 flex items-center justify-center text-[#64748b] hover:text-[#0f172a] hover:bg-gray-50 rounded-xl transition-all cursor-pointer">
-              {icons.bell}
+              <BellIcon/>
               <span className="absolute top-1 right-1 w-2 h-2 bg-red-500 rounded-full ring-2 ring-white"></span>
             </div>
           }
@@ -103,7 +103,7 @@ export default function Header({ sidebarOpen, setSidebarOpen }) {
               onClick={handleLogout}
               className="w-full px-4 py-2.5 text-left text-red-600 hover:bg-red-50 flex items-center gap-3 text-sm"
             >
-              {icons.logout} Déconnexion
+              <LogoutIcon/> Déconnexion
             </button>
           </div>
         </Dropdown>
