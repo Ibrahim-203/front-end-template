@@ -6,8 +6,9 @@ import Avatar from "../ui/Avatar";
 import { useAuth } from "../../contexts/AuthContext";
 
 
+
 export default function Sidebar({ sidebarOpen }) {
-    const {logout} = useAuth()
+    const {logout, user} = useAuth()
     return (
         <aside
             style={{
@@ -59,8 +60,8 @@ export default function Sidebar({ sidebarOpen }) {
                     <Avatar initials="AM" index={0} size={32} />
                     {sidebarOpen && (
                         <div className="flex-1 overflow-hidden">
-                            <p className="text-white text-sm font-semibold truncate">Alice Martin</p>
-                            <p className="text-[#64748b] text-xs">Administrateur</p>
+                            <p className="text-white text-sm font-semibold truncate">{user?.name}</p>
+                            <p className="text-[#64748b] text-xs">{user?.role}</p>
                         </div>
                     )}
                 </div>

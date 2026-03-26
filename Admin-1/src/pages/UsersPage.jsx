@@ -4,13 +4,7 @@ import { icons } from "../constants/icons.jsx";
 import Avatar from "../components/ui/Avatar";
 import StatusBadge from "../components/ui/StatusBadge";
 
-const USERS = [
-  { id: 1, name: "Alice Martin", email: "alice@example.com", role: "Admin", status: "Active", joined: "2024-01-12", avatar: "AM" },
-  { id: 2, name: "Bruno Leclerc", email: "bruno@example.com", role: "Editor", status: "Active", joined: "2024-03-05", avatar: "BL" },
-  { id: 3, name: "Céline Dupont", email: "celine@example.com", role: "Viewer", status: "Inactive", joined: "2024-02-18", avatar: "CD" },
-  { id: 4, name: "David Nguyen", email: "david@example.com", role: "Editor", status: "Active", joined: "2024-04-22", avatar: "DN" },
-  { id: 5, name: "Emma Petit", email: "emma@example.com", role: "Viewer", status: "Pending", joined: "2024-05-10", avatar: "EP" },
-];
+import { USERS } from "../constants/usersMockData.js";
 
 export default function UsersPage() {
   const [search, setSearch] = useState("");

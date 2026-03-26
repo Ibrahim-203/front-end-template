@@ -2,9 +2,11 @@ import { useState } from "react";
 import { COLORS } from "../constants/colors";
 import Avatar from "../components/ui/Avatar";
 import { icons } from "../constants/icons";
+import { useAuth } from "../contexts/AuthContext";
 
 export default function SettingsPage() {
   const [activeTab, setActiveTab] = useState("profile");
+  const {user} = useAuth()
 
   const tabs = [
     { id: "profile", label: "Profil" },
@@ -41,13 +43,13 @@ export default function SettingsPage() {
         <div style={{ display: "grid", gridTemplateColumns: "1fr 2fr", gap: 20 }}>
           <div style={{ background: COLORS.bgCard, border: `1px solid ${COLORS.border}`, borderRadius: 12, padding: 24, display: "flex", flexDirection: "column", alignItems: "center", gap: 16 }}>
             <div style={{ position: "relative" }}>
-              <Avatar initials="AM" index={0} size={80} />
+              <Avatar initials="AN" index={0} size={80} />
               <button style={{ position: "absolute", bottom: 0, right: 0, width: 28, height: 28, borderRadius: "50%", background: COLORS.primary, border: "2px solid #fff", color: "#fff", display: "flex", alignItems: "center", justifyContent: "center", cursor: "pointer" }}>
                 {icons.camera}
               </button>
             </div>
             <div style={{ textAlign: "center" }}>
-              <p style={{ margin: 0, fontWeight: 700, fontSize: 16, color: COLORS.text }}>Alice Martin</p>
+              <p style={{ margin: 0, fontWeight: 700, fontSize: 16, color: COLORS.text }}>Andry Nizwami Ibrahim</p>
               <p style={{ margin: "4px 0 0", fontSize: 13, color: COLORS.textMuted }}>Administrateur</p>
             </div>
             <div style={{ width: "100%", borderTop: `1px solid ${COLORS.border}`, paddingTop: 16 }}>
@@ -63,14 +65,14 @@ export default function SettingsPage() {
           <div style={{ background: COLORS.bgCard, border: `1px solid ${COLORS.border}`, borderRadius: 12, padding: 24 }}>
             <h2 style={{ margin: "0 0 20px", fontSize: 15, fontWeight: 600, color: COLORS.text }}>Informations personnelles</h2>
             <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 16, marginBottom: 16 }}>
-              {[["Prénom", "Alice"], ["Nom", "Martin"]].map(([label, val]) => (
+              {[["Prénom", user.name.split(' ').slice(1,3).join(' ')], ["Nom", user.name.split(' ')[0]]].map(([label, val]) => (
                 <div key={label}>
                   <label style={{ display: "block", fontSize: 12, fontWeight: 500, color: COLORS.textMuted, marginBottom: 6 }}>{label}</label>
                   <input defaultValue={val} style={{ width: "100%", padding: "9px 12px", border: `1px solid ${COLORS.border}`, borderRadius: 8, fontSize: 14, color: COLORS.text, outline: "none", boxSizing: "border-box" }} />
                 </div>
               ))}
             </div>
-            {[["Email", "alice@example.com"], ["Poste", "Administrateur système"], ["Entreprise", "Acme Corp"]].map(([label, val]) => (
+            {[["Email", user.email], ["Poste", user.role], ["Entreprise", "Nada"]].map(([label, val]) => (
               <div key={label} style={{ marginBottom: 16 }}>
                 <label style={{ display: "block", fontSize: 12, fontWeight: 500, color: COLORS.textMuted, marginBottom: 6 }}>{label}</label>
                 <input defaultValue={val} style={{ width: "100%", padding: "9px 12px", border: `1px solid ${COLORS.border}`, borderRadius: 8, fontSize: 14, color: COLORS.text, outline: "none", boxSizing: "border-box" }} />

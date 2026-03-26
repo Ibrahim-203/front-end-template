@@ -4,12 +4,15 @@ import { useAuth } from "../contexts/AuthContext.jsx";
 import { icons } from "../constants/icons.jsx";
 import { useNavigate } from "react-router-dom";
 
+import { USERS } from "../constants/usersMockData.js";
+
 
 export default function LoginPage() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate()
+
 
   const {login} = useAuth()
 
@@ -19,13 +22,7 @@ export default function LoginPage() {
 
     // Simulation de connexion (tu pourras remplacer par un vrai appel API plus tard)
     setTimeout(() => {
-      const fakeUser = {
-        id: 1,
-        name: "Alice Martin",
-        email: email || "alice@example.com",
-        role: "Administrateur",
-        avatar: "AM"
-      };
+      const fakeUser = USERS[0]
 
       login(fakeUser);
       navigate("/");        // Redirige vers le dashboard
