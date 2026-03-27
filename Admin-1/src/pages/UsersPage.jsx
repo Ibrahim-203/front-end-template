@@ -11,6 +11,7 @@ import PlusIcon from "../components/icons/PlusIcon.jsx";
 import Modal from "../components/ui/Modal.jsx";
 import ConfirmModal from "../components/ui/ConfirmModal.jsx";
 import { useToast } from "../contexts/ToastContext.jsx";
+import IconButton from "../components/ui/IconButton.jsx";
 
 export default function UsersPage() {
   const [isAddModalOpen, setIsAddModalOpen] = useState(false);
@@ -72,16 +73,17 @@ export default function UsersPage() {
 
   return (
     <div>
-      <div className="flex justify-between items-start mb-8">
+      <div className="flex justify-between items-center md:items-start mb-8">
         <div>
           <h1 className="text-2xl font-bold text-[#0f172a]">Utilisateurs</h1>
           <p className="text-[#64748b] mt-1">{USERS.length} utilisateurs au total</p>
         </div>
-        <button
+        {/* <button
           onClick={() => setIsAddModalOpen(true)}
           className="flex items-center gap-2 bg-[#1a56db] text-white px-5 py-2.5 rounded-xl font-medium hover:bg-[#1e40af] transition-colors">
           <PlusIcon /> Ajouter un utilisateur
-        </button>
+        </button> */}
+        <IconButton handleClick={() => setIsAddModalOpen(true)} label="Ajouter un utilisateur" icon={<PlusIcon/>}/>
       </div>
 
       <div className="bg-white border border-[#e2e8f0] rounded-2xl overflow-hidden">
