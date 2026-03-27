@@ -16,4 +16,9 @@ export const NAV_ITEMS = [
     label: "Paramètres",
     icon: icons.settings,
   },
+  {
+    id: "form",
+    label: "Formulaire",
+    icon: icons.fileIcon,
+  },
 ];
