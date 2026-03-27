@@ -19,3 +19,4 @@ export {default as AlertTriangle} from "./AlertTriangleIcon";
 export { default as CheckCircle } from "./CheckCircleIcon";
 export { default as AlertCircle } from "./AlertCircleIcon";
 export { default as Info } from "./InfoIcon";
+export { default as Menu } from "./MenuIcon";

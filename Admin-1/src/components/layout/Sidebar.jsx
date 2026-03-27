@@ -1,77 +1,78 @@
 import { NavLink } from "react-router-dom";
-import { COLORS } from "../../constants/colors";
 import { NAV_ITEMS } from "../../constants/navItems";
 import Avatar from "../ui/Avatar";
 import { useAuth } from "../../contexts/AuthContext";
+import { icons } from "../../constants/icons";
+import { X } from "../icons";
 
-import {LogoIcon, LogoutIcon} from '../icons/'
+export default function Sidebar({setSidebarOpen, isMobile = false }) {
+  const { logout, user } = useAuth();
 
+  const handleLinkClick = () => {
+    if (isMobile) {
+      setSidebarOpen(false); // Ferme automatiquement sur mobile
+    }
+  };
 
+  return (
+    <aside className={`
+      w-56 bg-[#0f172a] 
+      md:w-55 sticky top-0 left-0 bottom-0 z-100 h-screen flex flex-col justify-between overflow-hidden shrink-0
+    `}>
+      {/* Logo */}
+      <div className="flex items-center gap-3 px-5 py-5 border-b border-white/10">
+        <div className="w-8 h-8 rounded-xl bg-[#1a56db] flex items-center justify-center shrink-0">
+          <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="#fff" strokeWidth="2.8">
+            <path d="M12 2L2 7l10 5 10-5-10-5z" />
+            <path d="M2 17l10 5 10-5" />
+            <path d="M2 12l10 5 10-5" />
+          </svg>
+        </div>
+        <span className="text-white font-bold text-lg tracking-tight">AdminPanel</span>
+        <span className="cursor-pointer md:hidden rounded-full text-white  transition-all" onClick={()=>setSidebarOpen(false)}>
+        <X />
+        </span>
+      </div>
 
-export default function Sidebar({ sidebarOpen }) {
-    const {logout, user} = useAuth()
-    return (
-        <aside
-            style={{
-                width: sidebarOpen ? "220px" : "64px",
-                background: COLORS.sidebar,
-                transition: "width 0.22s cubic-bezier(0.4, 0, 0.2, 1)",
-            }}
-            className="fixed top-0 left-0 bottom-0 z-100 flex flex-col overflow-hidden shrink-0"
+      {/* Navigation */}
+      <nav className="flex-1 px-3 py-6 space-y-1">
+        {NAV_ITEMS.map((item) => (
+          <NavLink
+            key={item.id}
+            to={item.id === "dashboard" ? "/" : `/${item.id}`}
+            onClick={handleLinkClick}
+            className={({ isActive }) =>
+              `flex items-center gap-3 px-4 py-3 rounded-2xl text-sm font-medium transition-all
+              ${isActive 
+                ? "bg-[#1e40af] text-white" 
+                : "text-[#94a3b8] hover:bg-[#1e293b] hover:text-white"
+              }`
+            }
+          >
+            <span className="shrink-0">{item.icon}</span>
+            <span>{item.label}</span>
+          </NavLink>
+        ))}
+      </nav>
+
+      {/* Section utilisateur */}
+      <div className="p-4 border-t border-white/10">
+        <div className="flex items-center gap-3 px-3 py-3 rounded-2xl">
+          <Avatar initials={user?.avatar || "AN"} index={0} size={36} />
+          <div className="flex-1 min-w-0">
+            <p className="text-white text-sm font-semibold truncate">{user?.name || "Andry Nizwami"}</p>
+            <p className="text-[#64748b] text-xs">{user?.role || "Admin"}</p>
+          </div>
+        </div>
+
+        <button
+          onClick={logout}
+          className="flex items-center gap-3 w-full mt-4 px-4 py-3 text-[#94a3b8] hover:text-white hover:bg-[#1e293b] rounded-2xl transition-all"
         >
-            {/* Logo */}
-            <div
-                className="flex items-center gap-3 px-4 py-4.5 border-b border-white/10 min-h-16"
-            >
-                <div className="w-8 h-8 rounded-lg bg-[#1a56db] flex items-center justify-center shrink-0">
-                    <LogoIcon/>
-                </div>
-                {sidebarOpen && (
-                    <span className="text-white font-bold text-[15px] whitespace-nowrap">AdminPanel</span>
-                )}
-            </div>
-
-            {/* Navigation */}
-            <nav className="flex-1 p-3">
-                {NAV_ITEMS.map((item) => (
-                    <NavLink
-                        key={item.id}
-                        to={item.id === "dashboard" ? "/" : `/${item.id}`}
-                        className={({ isActive }) =>
-                            `flex items-center gap-3 w-full px-3 py-2.5 rounded-xl text-sm font-medium transition-all mb-1 ${isActive
-                                ? "bg-[#1e40af] text-white"
-                                : "text-[#94a3b8] hover:bg-[#1e293b] hover:text-white"
-                            } ${!sidebarOpen ? "justify-center" : ""}`
-                        }
-                        title={!sidebarOpen ? item.label : undefined}
-                    >
-                        <span className="shrink-0">{item.icon}</span>
-                        {sidebarOpen && <span>{item.label}</span>}
-                    </NavLink>
-                ))}
-            </nav>
-
-            {/* User section */}
-            <div className="p-3 border-t border-white/10">
-                <div className={`flex items-center gap-3 px-3 py-2 rounded-xl ${sidebarOpen ? "" : "justify-center"}`}>
-                    <Avatar initials="AM" index={0} size={32} />
-                    {sidebarOpen && (
-                        <div className="flex-1 overflow-hidden">
-                            <p className="text-white text-sm font-semibold truncate">{user?.name}</p>
-                            <p className="text-[#64748b] text-xs">{user?.role}</p>
-                        </div>
-                    )}
-                </div>
-
-                <button
-                    onClick={logout}
-                    className={`flex items-center gap-3 w-full px-3 py-2.25 text-[#64748b] hover:text-white rounded-xl mt-1 transition-all ${sidebarOpen ? "" : "justify-center"}`}
-                >
-                    <LogoutIcon/>
-                    {sidebarOpen && <span className="text-sm" >Déconnexion</span>}
-                </button>
-            </div>
-        </aside>
-    );
+          {icons.logout}
+          <span>Déconnexion</span>
+        </button>
+      </div>
+    </aside>
+  );
 }
-
