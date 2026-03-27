@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { SearchIcon } from "../icons";
+import { ChevronLeftIcon, ChevronRightIcon, SearchIcon } from "../icons";
 
 export default function DataTable({
     columns,           // [{ key: "name", label: "Nom", render?: (row) => ... }]
@@ -105,7 +105,7 @@ export default function DataTable({
 
             {/* Pagination */}
             {totalPages > 1 && (
-                <div className="px-6 py-4 border-t border-gray-200 flex items-center justify-between bg-gray-50">
+                <div className="px-6 py-4 border-t border-gray-200 flex flex-col md:flex-row gap-2 md:gap-0 items-center justify-center md:justify-between bg-gray-50">
                     <div className="text-sm text-gray-600">
                         Affichage de {startIndex + 1} à {Math.min(startIndex + itemsPerPage, filteredData.length)} sur {filteredData.length} résultats
                     </div>
@@ -114,9 +114,9 @@ export default function DataTable({
                         <button
                             onClick={() => goToPage(currentPage - 1)}
                             disabled={currentPage === 1}
-                            className="px-4 py-2 text-sm border border-gray-300 rounded-xl hover:bg-white disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
+                            className="md:px-4 px-2 py-2 text-sm border border-gray-300 rounded-xl hover:bg-white disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
                         >
-                            Précédent
+                          <ChevronLeftIcon className ="md:hidden"/>  <span className="hidden md:block">Précédent</span>
                         </button>
 
                         {Array.from({ length: Math.min(5, totalPages) }, (_, i) => {
@@ -138,9 +138,9 @@ export default function DataTable({
                         <button
                             onClick={() => goToPage(currentPage + 1)}
                             disabled={currentPage === totalPages}
-                            className="px-4 py-2 text-sm border border-gray-300 rounded-xl hover:bg-white disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
+                            className="md:px-4 px-2 py-2 text-sm border border-gray-300 rounded-xl hover:bg-white disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
                         >
-                            Suivant
+                          <ChevronRightIcon className ="md:hidden"/>  <span className="hidden md:block">Suivant</span>
                         </button>
                     </div>
                 </div>
